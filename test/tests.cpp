@@ -6,152 +6,162 @@
 #include "tasks.h"
 
 TEST(CircleTest, ConstructorRadius) {
-    Circle c(10);
-    EXPECT_DOUBLE_EQ(c.getRadius(), 10.0);
+    Circle c(10.0);
+    EXPECT_NEAR(c.getRadius(), 10.0, 1e-7);
 }
 
 TEST(CircleTest, ConstructorFerence) {
-    Circle c(1);
-    EXPECT_NEAR(c.getFerence(), 6.283185, 0.0001);
+    Circle c(10.0);
+    EXPECT_NEAR(c.getFerence(), 62.83185307, 1e-7);
 }
 
 TEST(CircleTest, ConstructorArea) {
-    Circle c(1);
-    EXPECT_NEAR(c.getArea(), 3.141592, 0.0001);
+    Circle c(10.0);
+    EXPECT_NEAR(c.getArea(), 314.15926535, 1e-7);
 }
 
-TEST(CircleTest, SetRadiusRecalculatesFerence) {
-    Circle c(0);
-    c.setRadius(5);
-    EXPECT_NEAR(c.getFerence(), 31.4159, 0.001);
-}
-
-TEST(CircleTest, SetRadiusRecalculatesArea) {
-    Circle c(0);
-    c.setRadius(5);
-    EXPECT_NEAR(c.getArea(), 78.5398, 0.001);
-}
-
-TEST(CircleTest, SetRadiusZero) {
-    Circle c(10);
-    c.setRadius(0);
+TEST(CircleTest, ConstructorZero) {
+    Circle c(0.0);
+    EXPECT_DOUBLE_EQ(c.getRadius(), 0.0);
+    EXPECT_DOUBLE_EQ(c.getFerence(), 0.0);
     EXPECT_DOUBLE_EQ(c.getArea(), 0.0);
 }
 
-TEST(CircleTest, SetFerenceRecalculatesRadius) {
-    Circle c(0);
-    c.setFerence(62.8318);
-    EXPECT_NEAR(c.getRadius(), 10.0, 0.001);
+TEST(CircleTest, SetRadiusSimple) {
+    Circle c(1.0);
+    c.setRadius(5.0);
+    EXPECT_DOUBLE_EQ(c.getRadius(), 5.0);
 }
 
-TEST(CircleTest, SetFerenceRecalculatesArea) {
-    Circle c(0);
-    c.setFerence(31.4159);
-    EXPECT_NEAR(c.getArea(), 78.5398, 0.001);
+TEST(CircleTest, SetRadiusUpdatesFerence) {
+    Circle c(1.0);
+    c.setRadius(10.0);
+    EXPECT_NEAR(c.getFerence(), 62.83185307, 1e-7);
+}
+
+TEST(CircleTest, SetRadiusUpdatesArea) {
+    Circle c(1.0);
+    c.setRadius(10.0);
+    EXPECT_NEAR(c.getArea(), 314.15926535, 1e-7);
+}
+
+TEST(CircleTest, SetRadiusLarge) {
+    Circle c(1.0);
+    c.setRadius(1000.0);
+    EXPECT_NEAR(c.getArea(), 3141592.6535, 1e-4);
+}
+
+TEST(CircleTest, SetRadiusSmall) {
+    Circle c(10.0);
+    c.setRadius(0.1);
+    EXPECT_NEAR(c.getFerence(), 0.6283185, 1e-7);
+}
+
+TEST(CircleTest, SetRadiusAndBack) {
+    Circle c(10.0);
+    c.setRadius(20.0);
+    c.setRadius(10.0);
+    EXPECT_NEAR(c.getArea(), 314.15926535, 1e-7);
+}
+
+TEST(CircleTest, SetFerenceSimple) {
+    Circle c(1.0);
+    c.setFerence(100.0);
+    EXPECT_DOUBLE_EQ(c.getFerence(), 100.0);
+}
+
+TEST(CircleTest, SetFerenceUpdatesRadius) {
+    Circle c(1.0);
+    c.setFerence(62.83185307);
+    EXPECT_NEAR(c.getRadius(), 10.0, 1e-7);
+}
+
+TEST(CircleTest, SetFerenceUpdatesArea) {
+    Circle c(1.0);
+    c.setFerence(62.83185307);
+    EXPECT_NEAR(c.getArea(), 314.15926535, 1e-7);
+}
+
+TEST(CircleTest, SetFerenceZero) {
+    Circle c(10.0);
+    c.setFerence(0.0);
+    EXPECT_DOUBLE_EQ(c.getRadius(), 0.0);
 }
 
 TEST(CircleTest, SetFerenceLarge) {
-    Circle c(1);
-    c.setFerence(1000);
-    EXPECT_GT(c.getRadius(), 150);
+    Circle c(1.0);
+    c.setFerence(1000.0);
+    EXPECT_NEAR(c.getRadius(), 159.154943, 1e-5);
 }
 
-TEST(CircleTest, SetAreaRecalculatesRadius) {
-    Circle c(0);
-    c.setArea(314.159);
-    EXPECT_NEAR(c.getRadius(), 10.0, 0.001);
+TEST(CircleTest, SetFerenceSmall) {
+    Circle c(1.0);
+    c.setFerence(0.001);
+    EXPECT_NEAR(c.getArea(), 0.0000000795, 1e-10);
 }
 
-TEST(CircleTest, SetAreaRecalculatesFerence) {
-    Circle c(0);
-    c.setArea(78.5398);
-    EXPECT_NEAR(c.getFerence(), 31.4159, 0.001);
+TEST(CircleTest, SetAreaSimple) {
+    Circle c(1.0);
+    c.setArea(100.0);
+    EXPECT_DOUBLE_EQ(c.getArea(), 100.0);
+}
+
+TEST(CircleTest, SetAreaUpdatesRadius) {
+    Circle c(1.0);
+    c.setArea(314.15926535);
+    EXPECT_NEAR(c.getRadius(), 10.0, 1e-7);
+}
+
+TEST(CircleTest, SetAreaUpdatesFerence) {
+    Circle c(1.0);
+    c.setArea(314.15926535);
+    EXPECT_NEAR(c.getFerence(), 62.83185307, 1e-7);
+}
+
+TEST(CircleTest, SetAreaZero) {
+    Circle c(10.0);
+    c.setArea(0.0);
+    EXPECT_DOUBLE_EQ(c.getFerence(), 0.0);
 }
 
 TEST(CircleTest, SetAreaSmall) {
-    Circle c(10);
-    c.setArea(0.0001);
-    EXPECT_LT(c.getRadius(), 0.01);
+    Circle c(1.0);
+    c.setArea(0.01);
+    EXPECT_NEAR(c.getRadius(), 0.0564189, 1e-6);
 }
 
-TEST(CircleTest, ConsistencyRadiusFerenceArea) {
-    Circle c(7.5);
-    double f = c.getFerence();
-    c.setFerence(f);
-    EXPECT_NEAR(c.getArea(), 176.7145, 0.001);
-}
-
-TEST(CircleTest, ConsistencyAreaToRadius) {
-    Circle c(1);
-    c.setArea(100);
+TEST(CircleTest, SetAreaConsistency) {
+    Circle c(1.0);
+    c.setArea(50.0);
     double r = c.getRadius();
-    c.setRadius(r);
-    EXPECT_NEAR(c.getArea(), 100.0, 0.00001);
+    EXPECT_NEAR(c.getFerence(), 2 * 3.1415926535 * r, 1e-7);
 }
 
-TEST(CircleTest, ExtremeValueSmall) {
-    Circle c(1e-9);
-    EXPECT_GT(c.getArea(), 0);
+TEST(TasksTest, EarthTaskResult) {
+    double result = earthTask(); 
+    EXPECT_NEAR(result, 0.1591549, 1e-6);
 }
 
-TEST(TaskEarthRope, ResultIsPositive) {
-    EXPECT_GT(taskEarthRope(), 0);
+TEST(TasksTest, EarthTaskPositive) {
+    EXPECT_GT(earthTask(), 0.0);
 }
 
-TEST(TaskEarthRope, CorrectCalculation) {
-    EXPECT_NEAR(taskEarthRope(), 0.159, 0.001);
+TEST(TasksTest, PoolTaskTotalCost) {
+    double cost = poolTask(3.0, 1.0, 1000.0, 2000.0);
+    EXPECT_NEAR(cost, 72256.63, 0.1);
 }
 
-TEST(TaskEarthRope, IndependentOfInitialRadius) {
-    double res = taskEarthRope();
-    EXPECT_NEAR(res, 0.1591549, 0.0000001);
+TEST(TasksTest, PoolTaskOnlyConcrete) {
+    double cost = poolTask(3.0, 1.0, 1000.0, 0.0);
+    EXPECT_NEAR(cost, 21991.14, 0.1);
 }
 
-TEST(TaskEarthRope, ResultUnit) {
-    double res = taskEarthRope();
-    EXPECT_LT(res, 1.0);
+TEST(TasksTest, PoolTaskOnlyFence) {
+    double cost = poolTask(3.0, 1.0, 0.0, 2000.0);
+    EXPECT_NEAR(cost, 50265.48, 0.1);
 }
 
-TEST(TaskPool, ConcreteCostPositive) {
-    EXPECT_GT(taskPoolCost(), 0);
-}
-
-TEST(TaskPool, FenceCostPositive) {
-    EXPECT_GT(taskFenceCost(), 0);
-}
-
-TEST(TaskPool, ConcreteCostValue) {
-    EXPECT_NEAR(taskPoolCost(), 21991.148, 0.1);
-}
-
-TEST(TaskPool, FenceCostValue) {
-    EXPECT_NEAR(taskFenceCost(), 50265.48, 0.1);
-}
-
-TEST(TaskPool, FenceVsConcrete) {
-    EXPECT_GT(taskFenceCost(), taskPoolCost());
-}
-
-TEST(TaskPool, AreaRatio) {
-    Circle pool(3);
-    Circle total(4);
-    EXPECT_LT(pool.getArea(), total.getArea());
-}
-
-TEST(CircleTest, HugeRadius) {
-    Circle c(1e6);
-    EXPECT_GT(c.getArea(), 1e12);
-}
-
-TEST(CircleTest, SetRadiusTwice) {
-    Circle c(5);
-    c.setRadius(10);
-    EXPECT_DOUBLE_EQ(c.getRadius(), 10.0);
-}
-
-TEST(CircleTest, SetSameArea) {
-    Circle c(10);
-    double old_r = c.getRadius();
-    c.setArea(c.getArea());
-    EXPECT_NEAR(c.getRadius(), old_r, 1e-9);
+TEST(TasksTest, PoolTaskSmallWidth) {
+    double cost = poolTask(3.0, 0.0, 1000.0, 2000.0);
+    EXPECT_NEAR(cost, 37699.1, 0.1);
 }

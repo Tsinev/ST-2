@@ -2,6 +2,8 @@
 #ifndef INCLUDE_CIRCLE_H_
 #define INCLUDE_CIRCLE_H_
 
+#include <cmath>
+
 class Circle {
  private:
     double radius;
@@ -17,4 +19,5 @@ class Circle {
     double getFerence() const;
     double getArea() const;
 };
+
 #endif  // INCLUDE_CIRCLE_H_

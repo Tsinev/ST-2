@@ -1,12 +1,12 @@
-add_executable(${PROJECT_NAME}.test AllTests.cpp tests.cpp)
+add_executable(tests tests.cpp)
 
+target_include_directories(tests PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
-
-target_link_libraries(${PROJECT_NAME}.test
-    PRIVATE
-        ${PROJECT_NAME}
-        gtest
-        pthread
+target_link_libraries(tests 
+    ${PROJECT_NAME} 
+    GTest::GTest 
+    GTest::Main 
+    pthread
 )
 
 
