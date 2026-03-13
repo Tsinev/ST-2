@@ -7,8 +7,7 @@ target_include_directories(${PROJECT_NAME}.test
 target_link_libraries(${PROJECT_NAME}.test
     PRIVATE
         ${PROJECT_NAME} 
-        gtest 
-        gtest_main 
+        gtest
         pthread
 )
 

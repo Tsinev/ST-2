@@ -7,7 +7,7 @@ set(src
     circle.cpp
     tasks.cpp
 )
-add_library(${PROJECT_NAME} SHARED ${src} ${header})
+add_library(${PROJECT_NAME} STATIC ${src} ${header})
 target_include_directories(${PROJECT_NAME} PUBLIC 
     ${header_path}
 )
