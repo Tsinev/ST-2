@@ -138,7 +138,7 @@ TEST(CircleTest, SetAreaConsistency) {
 }
 
 TEST(TasksTest, EarthTaskResult) {
-    double result = earthTask(); 
+    double result = earthTask();
     EXPECT_NEAR(result, 0.1591549, 1e-6);
 }
 
