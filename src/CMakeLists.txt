@@ -8,11 +8,14 @@ set(src
     tasks.cpp
 )
 
-add_library(${PROJECT_NAME} SHARED ${header} ${src})
+add_library(${PROJECT_NAME} SHARED 
+    circle.cpp 
+    tasks.cpp
+)
 
-target_include_directories(${PROJECT_NAME}
-  PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
-         ${${PROJECT_NAME}_SOURCE_DIR}/include)
+target_include_directories(${PROJECT_NAME} PUBLIC 
+    ${${PROJECT_NAME}_SOURCE_DIR}/include
+)
 
 target_link_libraries(${PROJECT_NAME} pthread)
 
