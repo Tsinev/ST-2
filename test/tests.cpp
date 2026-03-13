@@ -109,7 +109,7 @@ TEST(TaskEarthRope, IndependentOfInitialRadius) {
 
 TEST(TaskEarthRope, ResultUnit) {
     double res = taskEarthRope();
-    EXPECT_LT(res, 1.0); 
+    EXPECT_LT(res, 1.0);
 }
 
 TEST(TaskPool, ConcreteCostPositive) {
